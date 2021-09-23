@@ -5,6 +5,7 @@ ruby '2.7.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.6'
+gem 'bcrypt', '>= 3.1.11'
 gem 'bootstrap'
 
 # Use sqlite3 as the database for Active Record
@@ -39,7 +40,11 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
+<<<<<<< HEAD
 gem 'sqlite3'
+=======
+  gem 'sqlite3'
+>>>>>>> sign-up
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
