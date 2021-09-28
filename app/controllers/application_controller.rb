@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  include SessionsHelper
+
   def hello
-  render plain: "hello, world!"
+    render plain: 'hello, world!'
   end
 end
