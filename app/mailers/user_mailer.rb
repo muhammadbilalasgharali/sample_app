@@ -4,8 +4,7 @@ class UserMailer < ApplicationMailer
   # with the following lookup:
   #
   #   en.user_mailer.account_activation.subject
-  #
-  default from: 'bilal.asghar@devsinc.com'
+
   def account_activation(user)
     @user = user
     mail to: user.email, subject: "Account activation"
@@ -21,5 +20,12 @@ class UserMailer < ApplicationMailer
     mail to: user.email, subject: 'Password reset'
     # @greeting = "Hi"
     # mail to: "to@example.org"
+  end
+
+  def follow_user(following, follower)
+    @following = following
+    @follower = follower
+    # mail from: c_user.email
+    mail to: @following.email, subject: 'follow user'
   end
 end
