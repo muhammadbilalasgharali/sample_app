@@ -93,6 +93,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.9)
+    connection_pool (2.2.5)
     crass (1.0.6)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -360,6 +361,7 @@ GEM
       json (>= 1.8)
       nokogiri (~> 1.5)
       optimist (~> 3.0)
+    redis (4.4.0)
     regexp_parser (2.1.1)
     rest-client (2.1.0)
       http-accept (>= 1.7.0, < 2.0)
@@ -427,6 +429,10 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     shellany (0.0.1)
+    sidekiq (6.2.2)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
     spoon (0.0.6)
       ffi
     spring (2.1.1)
@@ -458,6 +464,8 @@ GEM
       unf_ext
     unf (0.1.4-java)
     unf_ext (0.0.8)
+    unf_ext (0.0.8-x64-mingw32)
+    unf_ext (0.0.8-x86-mingw32)
     unicode-display_width (2.1.0)
     web-console (3.7.0)
       actionview (>= 5.0)
@@ -511,6 +519,7 @@ DEPENDENCIES
   rubocop-rails
   sass-rails (~> 5.0)
   selenium-webdriver
+  sidekiq
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
