@@ -91,7 +91,7 @@ class User < ApplicationRecord
   # Follows a user.
   def follow(other_user)
     active_relationships.create(followed_id: other_user.id)
-    UserMailer.follow_user(other_user, self).deliver_later
+    MailSenderJob.perform_later(other_user, self)
   end
 
   # Unfollows a user.

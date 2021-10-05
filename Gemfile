@@ -8,6 +8,7 @@ ruby '2.7.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'bcrypt', '>= 3.1.11'
 gem 'faker', '>= 1.6.3'
+gem 'sidekiq'
 
 gem 'carrierwave', '0.11.2'
 gem 'mini_magick', '4.5.1'
