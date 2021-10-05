@@ -51,8 +51,6 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
-
-
   # Activates an account.
   def activate
     # update_attribute(:activated, true)
@@ -93,6 +91,7 @@ class User < ApplicationRecord
   # Follows a user.
   def follow(other_user)
     active_relationships.create(followed_id: other_user.id)
+    UserMailer.follow_user(other_user, self).deliver_later
   end
 
   # Unfollows a user.

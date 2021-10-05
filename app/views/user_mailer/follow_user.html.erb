@@ -1,0 +1,7 @@
+<h1>Follow User!</h1>
+<p><%= @follower.name %></p>
+<p> is Following you (<%= @Following.name %>).</p>
+
+<% if @follower.followers.where(id: @Following.id).empty? %>
+  <%= link_to  "Follow Back", user_url(@follower)  %>
+<% end %>
