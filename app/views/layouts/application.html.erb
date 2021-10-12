@@ -1,28 +1,25 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<%= csrf_meta_tags %>
-<%= stylesheet_link_tag'application', media: 'all','data-turbolinks-track':'reload' %>
-<%= javascript_include_tag 'application','data-turbolinks-track':'reload' %>
-<%= render 'layouts/shim' %>
-
-<%= yield :title %>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag'application', media: 'all','data-turbolinks-track':'reload' %>
+  <%= javascript_include_tag 'application','data-turbolinks-track':'reload' %>
+  <%= render 'layouts/shim' %>
+  <title>
+    <%= yield :title %>
+  </title>
 </head>
+
 <body>
-
-
-<%= render 'layouts/header' %>
-
-<div class="container">
-<% flash.each do |message_type, message| %>
-<%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
-<% end %>
-
-<%= yield %>
-
-<%= render 'layouts/footer' %>
-
-
-</div>
+  <%= render 'layouts/header' %>
+  <div class="container">
+    <% flash.each do |message_type, message| %>
+    <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+    <% end %>
+    <%= yield %>
+    <%= render 'layouts/footer' %>
+  </div>
 </body>
+
 </html>

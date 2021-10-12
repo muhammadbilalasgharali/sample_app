@@ -11,11 +11,11 @@ gem 'faker', '>= 1.6.3'
 gem 'sidekiq'
 
 gem 'carrierwave', '0.11.2'
-gem 'mini_magick', '4.5.1'
 gem 'fog', '1.38.0'
+gem 'mini_magick', '4.5.1'
 
-gem 'will_paginate', '>= 3.0.0'
 gem 'bootstrap-will_paginate', '>= 0.0.10'
+gem 'will_paginate', '>= 3.0.0'
 
 gem 'bootstrap-sass'
 gem 'jquery-rails'

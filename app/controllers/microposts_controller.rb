@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 class MicropostsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy]
+  before_action :logged_in_user, only: %i[create destroy]
   before_action :correct_user, only: :destroy
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
-      flash[:success] = "Micropost created!"
-      redirect_to root_url
+      flash[:success] = 'Micropost created!'
+      @micropost.group_id ? (redirect_to group_path(@micropost.group_id)) : (redirect_to root_url)
     else
       render 'static_pages/home'
     end
@@ -14,14 +16,14 @@ class MicropostsController < ApplicationController
 
   def destroy
     @micropost.destroy
-    flash[:success] = "Micropost deleted"
-    redirect_to request.referrer || root_url
+    flash[:success] = 'Micropost deleted'
+    redirect_to request.referer || root_url
   end
 
   private
 
   def micropost_params
-    params.require(:micropost).permit(:content, :picture)
+    params.require(:micropost).permit(:content, :picture, :group_id)
   end
 
   def correct_user

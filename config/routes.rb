@@ -31,9 +31,20 @@ Rails.application.routes.draw do
 
   resources :account_activations, only: [:edit]
   resources :users
-  resources :password_resets, only:[:new, :create, :edit, :update]
-  resources :microposts, only: [:create, :destroy]
-  resources :relationships, only: [:create, :destroy]
+  resources :password_resets, only: %i[new create edit update]
+  resources :microposts, only: %i[create destroy]
+  resources :relationships, only: %i[create destroy]
+
+  resources :groups
+  # get path, to: sample_app/public/404.html
+
+  # Any routes that aren't defined above here go to the 404
+
+  # match "*a", :to => "application#routing_error"
+
+  # def routing_error
+  #   render "404", :status => 404
+  # end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
