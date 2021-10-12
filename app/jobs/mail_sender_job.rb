@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MailSenderJob < ApplicationJob
   queue_as :default
 

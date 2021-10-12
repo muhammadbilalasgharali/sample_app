@@ -1,0 +1,18 @@
+<% provide(:title, "Index of Group") %>
+<h1>All Groups</h1>
+
+<% @group.each do |group| %>
+<h3 class="bg-success text-dark" >Group Name: <%= link_to group.name, group %> <h3>
+<h5>Admin:  <%= User.find(group.user_id).name %> <h5>
+<h5>Description: <%= group.description %> <h5>
+<h5>Created at: <%= group.created_at %> <h5>
+
+  <span class="timestamp"> Created <%= time_ago_in_words(group.created_at) %> ago.
+    <% if current_user?(group.user) %>
+    <%= link_to "delete", group, method: :delete, data: { confirm: "You sure?" } %>
+    <% end %>
+  </span>
+<hr>
+<% end %>
+
+<%= link_to 'Create New Group', new_group_path, class: "btn btn-primary btn-block" %>
