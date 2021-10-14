@@ -6,7 +6,6 @@ class GroupsController < ApplicationController
 
   def show
     if logged_in?
-      # @micropost = current_user.microposts.build if logged_in?
       @group = Group.find(params[:id])
       @micropost = current_user.microposts.build if logged_in?
       @feed_items = Group.find(params[:id]).microposts.paginate(page: params[:page])
@@ -14,15 +13,11 @@ class GroupsController < ApplicationController
   end
 
   def index
-    if logged_in?
-      @group = Group.all
-    end
+    @group = Group.all if logged_in?
   end
 
   def new
-    if logged_in?
-      @group = Group.new
-    end
+    @group = Group.new if logged_in?
   end
 
   def create

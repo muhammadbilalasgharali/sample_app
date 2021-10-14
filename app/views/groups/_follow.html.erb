@@ -1,0 +1,4 @@
+<%= form_for(current_user.new_relationships.build, remote: true) do |f| %>
+<div><%= hidden_field_tag :group_id, @group.id %></div>
+<%= f.submit "Follow", class: "btn btn-primary" %>
+<% end %>

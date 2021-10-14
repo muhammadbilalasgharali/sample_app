@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_08_124914) do
+ActiveRecord::Schema.define(version: 2021_10_12_104358) do
+
+  create_table "group_relationships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_group_relationships_on_group_id"
+  end
 
   create_table "groups", force: :cascade do |t|
     t.string "name"

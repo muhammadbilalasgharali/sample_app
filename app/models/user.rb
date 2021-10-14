@@ -6,9 +6,11 @@ class User < ApplicationRecord
 
   has_many :active_relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
   has_many :passive_relationships, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
+  has_many :new_relationships, class_name: 'GroupRelationship', foreign_key: 'follower_id', dependent: :destroy
 
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
+  has_many :following_groups, through: :new_relationships, source: :group
 
   attr_accessor :remember_token, :activation_token, :reset_token
 
@@ -55,9 +57,6 @@ class User < ApplicationRecord
 
   # Activates an account.
   def activate
-    # update_attribute(:activated, true)
-    # update_attribute(:activated_at, Time.zone.now)
-
     update_columns(activated: true, activated_at: Time.zone.now)
   end
 
@@ -69,8 +68,6 @@ class User < ApplicationRecord
   # Sets the password reset attributes.
   def create_reset_digest
     self.reset_token = User.new_token
-    # update_attribute(:reset_digest, User.digest(reset_token))
-    # update_attribute(:reset_sent_at, Time.zone.now)
     update_columns(reset_digest: User.digest(reset_token), reset_sent_at: Time.zone.now)
   end
 
@@ -86,7 +83,6 @@ class User < ApplicationRecord
 
   # See "Following users" for the full implementation.
   def feed
-    # Micropost.where("user_id = ?", id)
     Micropost.where('user_id IN (:following_ids) OR user_id = :user_id', following_ids: following_ids, user_id: id)
   end
 
@@ -94,6 +90,18 @@ class User < ApplicationRecord
   def follow(other_user)
     active_relationships.create(followed_id: other_user.id)
     MailSenderJob.perform_later(other_user, self)
+  end
+
+  def follow_group(group)
+    new_relationships.create!(group_id: group.id, follower_id: id) unless following_group?(group)
+  end
+
+  def unfollow_group(group)
+    new_relationships.find_by(group_id: group.id).destroy
+  end
+
+  def group_follower?(group)
+    group.followers.find_by(id: id).present?
   end
 
   # Unfollows a user.
@@ -104,6 +112,10 @@ class User < ApplicationRecord
   # Returns true if the current user is following the other user.
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  def following_group?(group)
+    following_groups.include?(group)
   end
 
   private
