@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'group_relationship/create'
+  get 'group_relationship/destroy'
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
@@ -34,6 +36,7 @@ Rails.application.routes.draw do
   resources :password_resets, only: %i[new create edit update]
   resources :microposts, only: %i[create destroy]
   resources :relationships, only: %i[create destroy]
+  resources :group_relationships, only: %i[create destroy]
 
   resources :groups
   # get path, to: sample_app/public/404.html
